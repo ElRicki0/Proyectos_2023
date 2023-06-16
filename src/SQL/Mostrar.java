@@ -71,6 +71,7 @@ public class Mostrar extends javax.swing.JFrame {
         txtdatos = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lupa = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 153));
@@ -149,6 +150,9 @@ public class Mostrar extends javax.swing.JFrame {
         jLabel1.setText("Buscar:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 90, -1));
         jPanel1.add(lupa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 50, 40));
+
+        jButton1.setText("jButton1");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,6 +246,7 @@ public class Mostrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JT_personas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
