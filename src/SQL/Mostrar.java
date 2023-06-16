@@ -36,14 +36,14 @@ public class Mostrar extends javax.swing.JFrame {
     
     private void Mostrar(){
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new Object []{"nombre", "contraseña"});
+        modelo.setColumnIdentifiers(new Object []{"idUser", "nombre", "contraseña"});
         try{
             Statement statement = ConexionSQL.getConexion().createStatement();
             String query = "SELECT * FROM tbUsers";
             ResultSet rs = statement.executeQuery(query);
             
             while(rs.next()){
-                modelo.addRow(new Object[] {rs.getString("nombre"),rs.getString("contraseña")});
+                modelo.addRow(new Object[] {rs.getInt("idUser"), rs.getString("nombre"),rs.getString("contraseña")});
             }
             JT_personas.setModel(modelo);
             
@@ -71,7 +71,7 @@ public class Mostrar extends javax.swing.JFrame {
         txtdatos = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lupa = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 153));
@@ -138,12 +138,13 @@ public class Mostrar extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 500));
 
+        txtdatos.setForeground(new java.awt.Color(51, 153, 255));
         txtdatos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtdatosKeyReleased(evt);
             }
         });
-        jPanel1.add(txtdatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 290, 40));
+        jPanel1.add(txtdatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 290, 40));
 
         jLabel1.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -151,8 +152,24 @@ public class Mostrar extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 90, -1));
         jPanel1.add(lupa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 50, 40));
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, -1, -1));
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnEliminarLayout = new javax.swing.GroupLayout(btnEliminar);
+        btnEliminar.setLayout(btnEliminarLayout);
+        btnEliminarLayout.setHorizontalGroup(
+            btnEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+        btnEliminarLayout.setVerticalGroup(
+            btnEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 110, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,7 +206,7 @@ public class Mostrar extends javax.swing.JFrame {
         DefaultTableModel modelo= new DefaultTableModel();
         
         //poner los encabesados de la tabla 
-        modelo.setColumnIdentifiers(new Object[]{"nombre", "contraseña"});
+        modelo.setColumnIdentifiers(new Object[]{"idUser","nombre", "contraseña"});
         //Hacemos un select 
         try{
             Statement statement  = ConexionSQL.getConexion() . createStatement();
@@ -198,7 +215,7 @@ public class Mostrar extends javax.swing.JFrame {
             
             while (rs.next())
             {                
-                  modelo.addRow(new Object[]{rs.getString("nombre"), rs.getString("contraseña")});
+                  modelo.addRow(new Object[]{rs.getInt("idUser"),rs.getString("nombre"), rs.getString("contraseña")});
             }
             JT_personas.setModel(modelo);
             
@@ -207,6 +224,16 @@ public class Mostrar extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }//GEN-LAST:event_txtdatosKeyReleased
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        //identificar la fila seleccionada 
+        int FilaSelect = JT_personas.getSelectedRow();
+        
+        //tomamos el id de la fila seleccionada
+        
+        String idSelect = JT_personas.getValueAt(ERROR, NORMAL)
+        
+    }//GEN-LAST:event_btnEliminarMouseClicked
      
     /**
      * @param args the command line arguments
@@ -246,7 +273,7 @@ public class Mostrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JT_personas;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel btnEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
