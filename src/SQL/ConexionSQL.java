@@ -7,7 +7,8 @@ public class ConexionSQL {
     
     
     public static Connection getConexion(){
-                String conexionUrl  = "jdbc:sqlserver://localhost:58075;" 
+        //cambiar el puerto 
+                String conexionUrl  = "jdbc:sqlserver://localhost:60805;" 
                 +"databaseName=usersDB;"
                 + "user=sa;"
                 + "password=itr2023;" +

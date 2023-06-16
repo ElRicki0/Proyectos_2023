@@ -24,8 +24,10 @@ public class Mostrar extends javax.swing.JFrame {
     public Mostrar() {
         initComponents();
   
-        rsscalelabel.RSScaleLabel.setScaleLabel(jlHome, "src/images/home.png");
-        jpHomeSelect.setVisible(false);
+        rsscalelabel.RSScaleLabel.setScaleLabel(jlHome, "src/images/home.png");        
+        rsscalelabel.RSScaleLabel.setScaleLabel(lupa, "src/images/lupa.png");
+
+        jpHomeSelect.setVisible(false);  
           Mostrar();
     }
     
@@ -66,11 +68,16 @@ public class Mostrar extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jlHome = new javax.swing.JLabel();
         jpHomeSelect = new javax.swing.JPanel();
+        txtdatos = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        lupa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 153));
+        setResizable(false);
         setSize(new java.awt.Dimension(600, 500));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
         jPanel1.setMaximumSize(new java.awt.Dimension(600, 500));
         jPanel1.setMinimumSize(new java.awt.Dimension(600, 500));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -93,7 +100,7 @@ public class Mostrar extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JT_personas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, -1, 150));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, -1, 250));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,7 +120,7 @@ public class Mostrar extends javax.swing.JFrame {
         });
         jPanel2.add(jlHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 40, 40));
 
-        jpHomeSelect.setBackground(new java.awt.Color(255, 255, 255));
+        jpHomeSelect.setBackground(new java.awt.Color(255, 255, 204));
 
         javax.swing.GroupLayout jpHomeSelectLayout = new javax.swing.GroupLayout(jpHomeSelect);
         jpHomeSelect.setLayout(jpHomeSelectLayout);
@@ -129,6 +136,19 @@ public class Mostrar extends javax.swing.JFrame {
         jPanel2.add(jpHomeSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 80, 60));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 500));
+
+        txtdatos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtdatosKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtdatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 290, 40));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 3, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Buscar:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 90, -1));
+        jPanel1.add(lupa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 50, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,6 +180,30 @@ public class Mostrar extends javax.swing.JFrame {
      
     }//GEN-LAST:event_JT_personasMouseClicked
 
+    private void txtdatosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdatosKeyReleased
+        //Creamos el modelo de datos 
+        DefaultTableModel modelo= new DefaultTableModel();
+        
+        //poner los encabesados de la tabla 
+        modelo.setColumnIdentifiers(new Object[]{"nombre", "contraseña"});
+        //Hacemos un select 
+        try{
+            Statement statement  = ConexionSQL.getConexion() . createStatement();
+            String query = "Select * from tbUsers where nombre like '"+txtdatos.getText()+"%'";
+            ResultSet rs = statement.executeQuery(query);
+            
+            while (rs.next())
+            {                
+                  modelo.addRow(new Object[]{rs.getString("nombre"), rs.getString("contraseña")});
+            }
+            JT_personas.setModel(modelo);
+            
+        }
+        catch (SQLException ex){
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_txtdatosKeyReleased
+     
     /**
      * @param args the command line arguments
      */
@@ -198,10 +242,13 @@ public class Mostrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JT_personas;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlHome;
     private javax.swing.JPanel jpHomeSelect;
+    private javax.swing.JLabel lupa;
+    private javax.swing.JTextField txtdatos;
     // End of variables declaration//GEN-END:variables
 }
