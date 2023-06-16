@@ -232,7 +232,15 @@ public class Mostrar extends javax.swing.JFrame {
         //tomamos el id de la fila seleccionada
         
         String idSelect = JT_personas.getValueAt(FilaSelect, 0).toString();
-        
+        try{
+            PreparedStatement deleteUser = ConexionSQL.getConexion().prepareStatement("Delete from tbUsers where idUser= ?");
+            deleteUser.setString(1, idSelect);
+            deleteUser.executeUpdate();
+            Mostrar();
+        }
+        catch(SQLException ex){
+            System.out.println(ex.toString());
+        }
     }//GEN-LAST:event_btnEliminarMouseClicked
      
     /**
@@ -284,3 +292,4 @@ public class Mostrar extends javax.swing.JFrame {
     private javax.swing.JTextField txtdatos;
     // End of variables declaration//GEN-END:variables
 }
+// se comento para la prueva
