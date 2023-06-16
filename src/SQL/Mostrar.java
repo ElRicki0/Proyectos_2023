@@ -231,7 +231,7 @@ public class Mostrar extends javax.swing.JFrame {
         
         //tomamos el id de la fila seleccionada
         
-        String idSelect = JT_personas.getValueAt(ERROR, NORMAL)
+        String idSelect = JT_personas.getValueAt(FilaSelect, 0).toString();
         
     }//GEN-LAST:event_btnEliminarMouseClicked
      
