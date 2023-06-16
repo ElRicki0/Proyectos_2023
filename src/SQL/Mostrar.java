@@ -72,6 +72,7 @@ public class Mostrar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lupa = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 153));
@@ -170,6 +171,9 @@ public class Mostrar extends javax.swing.JFrame {
         );
 
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 110, 60));
+
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -283,6 +287,7 @@ public class Mostrar extends javax.swing.JFrame {
     private javax.swing.JTable JT_personas;
     private javax.swing.JPanel btnEliminar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
